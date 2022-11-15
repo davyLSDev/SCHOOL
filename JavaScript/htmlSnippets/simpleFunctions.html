@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function myTryFunction() {
+  document.getElementById("demo").innerHTML = "Now you have done it.";
+}
+function myEraseFunction() {
+  document.getElementById("demo").innerHTML = "";
+}
+</script>
+</head>
+
+<body>
+
+<p>When you click "Try it", a function will be called.</p>
+<p>The function will display a message. Then when you click "ERASE", another function will be called which erases the text.</p>
+
+<button onclick="myTryFunction()">Try it now</button>
+<button onclick="myEraseFunction()">ERASE</button>
+
+<p id="demo"></p>
+
+</body>
+</html>

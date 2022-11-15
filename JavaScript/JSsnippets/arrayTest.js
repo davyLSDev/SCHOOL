@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+let a = Array(5).fill(9)
+console.log(a)
+console.log('Now push a the value of p to the end of the array')
+a.push('p')
+console.log(a)
+console.log('Now unshift the value of X to the beginning of the array')
+a.unshift('X')
+console.log(a)
+console.log('Now remove an element at the end of the array')
+a.pop()
+console.log(a)
+console.log('What happens if you put a parameter like 2 in the pop function?')
+a.pop(2)
+console.log(a)
+console.log('The parameter is just ignored. Now for the last function, use .shift()')
+a.shift()
+console.log(a)
+
