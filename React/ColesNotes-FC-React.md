@@ -26,11 +26,55 @@ These subjects I need to know more of before moving onto learning React.
 
 ## Why should you learn React?
 ## How to install React
+Ok, that was easy. Already done prior.
+
+Then, generate your first React app using the application generator, thus:
+
+	npx create-react-app todolist
 ## React Components
+Poking around at the application that *npx-create-app todoist* generated, there are a few main pieces in the *src* folder, *App.js* is where you can see JSX on display.
+
 ## Introduction to JSX
+In the app, App.js, everything wrapped in parenthesis in the app's **return()* is JSX:
+
+	<div className="App">
+	  <header className="App-header">
+	    <img src={logo} className="App-logo" alt="logo"
+	    <p>
+		Edit <code>src/App.js</code> and save to reload.
+	    </p>
+	    <a
+		className="App-link"
+		href="https://reactjs.org"
+		target="_blank"
+		rel="noopener noreferrer"
+	    >
+		Learn React
+	    </a>
+	  </header>
+	</div>
+	
+React will take this JSX and *compile* it into JavaScript code that the browser can consume. The idea behind JSX is that it is easier to create UI interfaces with it than only using JavaScript.	
+	
 ## Using JSX to compose UI
+Here is a function to add to the App.js file in the basic generated React code:
+    
+    function WelcomeMessage() {
+        return <p>The <i>WelcomeMessage function</i> says: Welcome to react!</p>
+    }
+
+Then, in order to render the message, put this code in the body of the App function return:
+
+	<WelcomeMessage/>
+
+It is as though we have made our own html tag through the *magic* of React. React components and JSX enable us to create application interfaces and use them as though they are html.
+
 ## The difference between JSX and HTML
+*ClassName* was selected by the designers of React so that it could not interfere with JavaScript's *class*, which is a reserved word. Also, html has a *class* attribute which could have become confusing if *class* was used for multiple contexts. One other area of difference between JSX and html is that JSX is very rigid about syntax and will complain if tags that need to be closed are not. Html, on the other hand is much less stringent about these kinds of details, and will still work. JSX also allows for embedding JavaScript.
+ 
 ## Embedding JavaScript in JSX
+
+
 ## Managing state in React
 ## Component Props in React
 ## Data flow in a React application
