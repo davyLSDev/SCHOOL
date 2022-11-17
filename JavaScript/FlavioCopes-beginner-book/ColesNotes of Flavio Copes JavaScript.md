@@ -506,9 +506,27 @@ some result?
 
 **Promises** are another way to deal with assynchronous code without having to rely on nesting code. This should make it easier to maintain code. Codeback "hell" is when there are 2-3 levels of nested callbacks.
 
-
-
-
-
 ## Async and Await
+**Async** and **await** are a tidier and more expressive way to accomplish **promise** or **callback** functionality, especially with more complex code. An **async** function is more abstract than a **promise**; in fact, an async fucntion returns a promise. **Await** is a reserved word in JavaScript which is only allowed inside an **async** function or at the top level of a **module**. **Await** is used to wait for a **promise** and get its fulfillment value. **C#** has a similar concept.
+
+        const getData = () => {
+                return new Promise((resolve, reject) => {
+                        setTimeout(() =>
+                                resolve('some data'), 2000)
+                })
+        }
+
+        const doSomeTask = async () => {
+                const data = await getData()
+                console.log(data)
+        }
+
 ## Variables scope
+
+There are three scopes at which a variable is valid in JavaScript:
+
+* **Global** - any variable defined outside a function or a block is by default global.
+* **Block** - a variable defined using *const*, or *let* is only visible inside the block - think inside curly braces - where it is defined. You will find these in *if*, *for*, or *function* statements.
+* **Function** - a variable defined inside a function is only valid within that function.
+
+Here is where *var* lets you down. If a variable is defined by *var* in an *if* block, after the block is completed the variable is still valid.
