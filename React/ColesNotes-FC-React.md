@@ -21,6 +21,9 @@ These subjects I need to know more of before moving onto learning React.
 ### Async/Await
 * [Reference URL](https://flaviocopes.com/javascript-async-await/)
 
+* [18-Nov-2022] talked with Tom about callbacks, promises, async/await and it seems like I have enough basic understanding to go ahead with learning React. It wouldn't hurt to do a wee bit of review, but . .
+* some topics to look up: JavaScript **microstack** / **macrostack**
+
 ### ES Modules
 * [Reference URL](https://flaviocopes.com/es-modules/)
 
@@ -53,12 +56,12 @@ In the app, App.js, everything wrapped in parenthesis in the app's **return()* i
 	    </a>
 	  </header>
 	</div>
-	
-React will take this JSX and *compile* it into JavaScript code that the browser can consume. The idea behind JSX is that it is easier to create UI interfaces with it than only using JavaScript.	
-	
+
+React will take this JSX and *compile* it into JavaScript code that the browser can consume. The idea behind JSX is that it is easier to create UI interfaces with it than only using JavaScript.
+
 ## Using JSX to compose UI
 Here is a function to add to the App.js file in the basic generated React code:
-    
+
     function WelcomeMessage() {
         return <p>The <i>WelcomeMessage function</i> says: Welcome to react!</p>
     }
@@ -71,9 +74,45 @@ It is as though we have made our own html tag through the *magic* of React. Reac
 
 ## The difference between JSX and HTML
 *ClassName* was selected by the designers of React so that it could not interfere with JavaScript's *class*, which is a reserved word. Also, html has a *class* attribute which could have become confusing if *class* was used for multiple contexts. One other area of difference between JSX and html is that JSX is very rigid about syntax and will complain if tags that need to be closed are not. Html, on the other hand is much less stringent about these kinds of details, and will still work. JSX also allows for embedding JavaScript.
- 
+
 ## Embedding JavaScript in JSX
 
+* I startted trying to find an alternative svg, but ran into problems, also the same happened when I tried to make an svg using Gimp(that doesn't work anyway), and inkscape, also editing the logo.svg using inkscape.
+
+Flavio's example with the ternary operator is missing the ":" along with the result which is expected when the two things being compared are not ===.
+
+so use this instead, and it is expanded a bit to demonstrate how the ternary function works:
+
+	function App() {
+  		const message1 = "Hello!";
+  		const message2 = "Goodbye!";
+  		return (
+    		<div className="App">
+      		  <header className="App-header">
+        		<img src={logo} className="App-logo" alt="logo" />
+        		<p>
+          			Edit <code>src/App.js</code> and save to reload.
+        		</p>
+        		<h4>Message one is {message1}</h4>
+        		<h4>Message two is {message2}</h4>
+        		<p>
+          			{message1 === 'Hello!' ? 'Message one really was "Hello!"' : 'The message was NOT "Hello!"'}
+        		</p>
+        		<p>
+          			{message1 === message2 ? 'The two messages are the same!' : 'The messages are the same'}
+        		</p>
+        		<a
+          			className="App-link"
+          			href="https://reactjs.org"
+          			target="_blank"
+          			rel="noopener noreferrer"
+        		>
+          		Learn React
+        		</a>
+      		  </header>
+    		</div>
+  		);
+	}
 
 ## Managing state in React
 ## Component Props in React
