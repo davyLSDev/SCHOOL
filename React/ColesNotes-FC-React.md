@@ -84,37 +84,65 @@ Flavio's example with the ternary operator is missing the ":" along with the res
 so use this instead, and it is expanded a bit to demonstrate how the ternary function works:
 
 	function App() {
-  		const message1 = "Hello!";
-  		const message2 = "Goodbye!";
-  		return (
-    		<div className="App">
-      		  <header className="App-header">
-        		<img src={logo} className="App-logo" alt="logo" />
-        		<p>
-          			Edit <code>src/App.js</code> and save to reload.
-        		</p>
-        		<h4>Message one is {message1}</h4>
-        		<h4>Message two is {message2}</h4>
-        		<p>
-          			{message1 === 'Hello!' ? 'Message one really was "Hello!"' : 'The message was NOT "Hello!"'}
-        		</p>
-        		<p>
-          			{message1 === message2 ? 'The two messages are the same!' : 'The messages are the same'}
-        		</p>
-        		<a
-          			className="App-link"
-          			href="https://reactjs.org"
-          			target="_blank"
-          			rel="noopener noreferrer"
-        		>
-          		Learn React
-        		</a>
-      		  </header>
-    		</div>
+	  const message1 = "Hello!";
+  	  const message2 = "Goodbye!";
+  	    return (
+    	  <div className="App">
+      	    <header className="App-header">
+        	  <img src={logo} className="App-logo" alt="logo" />
+        	  <p>
+          	    Edit <code>src/App.js</code> and save to reload.
+        	  </p>
+        	  <h4>Message one is {message1}</h4>
+        	  <h4>Message two is {message2}</h4>
+        	  <p>
+          	    {message1 === 'Hello!' ? 'Message one really was "Hello!"' : 'The message was NOT "Hello!"'}
+        	  </p>
+        	  <p>
+          	    {message1 === message2 ? 'The two messages are the same!' : 'The messages are the same'}
+        	  </p>
+        	  <a
+          	    className="App-link"
+          	    href="https://reactjs.org"
+          	    target="_blank"
+          		rel="noopener noreferrer"
+        	  >
+          	    Learn React
+        	  </a>
+    	    </header>
+    	  </div>
   		);
 	}
 
 ## Managing state in React
+State is the data that a given component manages. This is managed by the *useState* utility that React provides. Underlyingly, it is a **hook**. The details of how a hook operates are not necessary to get started using *useState*. You may have many useState() calls in your code.
+
+Here is code snippet:
+	import React, { useState } from 'react'
+	// . . .
+
+	const [count, setCount] = userState(0)
+
+Where *count* is the state variable, and *setCount*. You modify the state variable only by its modifier function if you want the React component to update its UI based on any change made to the state variable. Note, useState() returns an array which we must destructure using **array destructuring** to gain access to each of the items in the array.
+
+### Practical example:
+
+	import { useState } from 'react'
+	
+	const Counter = () => {
+	  const [count, setCount] = useState(0)
+	  
+	  return (
+	    <div>
+	      <p>You clicked {count} times</p>
+	      <button onClick={() => setCount(count + 1)}>Click me</button>
+	    </div>
+	  )
+	}
+
+	ReactDOM.render(<Counter />, document.getElementById('app'))
+
+
 ## Component Props in React
 ## Data flow in a React application
 ## Handling user events in React
