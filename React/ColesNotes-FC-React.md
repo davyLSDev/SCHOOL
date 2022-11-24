@@ -226,6 +226,39 @@ Where *count* is the state variable, and *setCount*. You modify the state variab
 	export default App;
 
 ## Component Props in React
+
+**Props**, which stands for properties are like *function arguements*, or initial values can be passed as *attributes* to the component in JSX. Props are **read only**. Components either contain data through state, or reveive data through props.
+
+A word about curly brackets meaning:
+* in a function arguement, they are used as part of the object destructuring syntax:
+	function WelcomeMessage({ myprop }) {
+		return <p>{myprop}</p>
+	}
+* they define a function or other code block
+* in JSX to print a JavaScript value: 
+	<WelcomeMessage myprop={'somevalue'} />
+
+Here is another way to do this:
+
+	function Welcome(props) {
+  	  return <h1>Hello, {props.name}</h1>;
+	}
+
+This component could also be defined thus:
+	class Welcome extends React.Component {
+  	  render() {
+     	return <h1>Hello, {this.props.name}</h1>;
+  	  }
+	}	
+
+Then this bit is in the App.js (as much as you need, as in a create-react-app, the render portion is actually in index.js):
+
+	const root = ReactDOM.createRoot(document.getElementById('root'));
+	const element = <Welcome name="Dawson" />;
+	root.render(element);
+
+Props can be functions; this enables a *child* component to call functions from the *parent* component.
+
 ## Data flow in a React application
 ## Handling user events in React
 ## Lifecycle events in a React component

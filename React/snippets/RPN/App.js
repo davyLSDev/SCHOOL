@@ -1,5 +1,5 @@
 import './App.css';
-	import { useState } from 'react'
+import { useState } from 'react'
 
 	const Calculator = () => {
   	const [number, GetNumber] = useState(0) // number is made from button pushing, or calculation
