@@ -1,80 +1,201 @@
+/* README
+Clearly there are improvements to be made:
+OK 1) Logic for all the operations
+1b) Have to figure out how to register that the "." button was pushed after "returning"
+OK 2) infer functions from the actual button label instead of mapping "buttonType"?
+OK 3) Logic(?) for laying out rows of buttons at a time
+4) Better css, grid or? for laying out buttons
+5) A better display, like LCD font or something
+6) maybe a box around the calculator
+7) Need to start working on TDD!
+*/
+
 import './App.css';
-	import { useState } from 'react'
+import { useState } from 'react'
 
-	const Calculator = () => {
-  	const [number, GetNumber] = useState(0) // number is made from button pushing, or calculation
-  	const [pushedNumber, Push] = useState(0)
-  	const [decimalKey, PressedDecimalKey] = useState(0) // to help prevent multiple decimal points in entering number
+function App() {
+  const [number, GetNumber] = useState(0)
+  const [savedNumber, SaveNumber] = useState(0)
+  const [decimalKey, PressedDecimalKey] = useState(0) // to help prevent multiple decimal points in entering number
+  const [status, UpdateStatus] = useState(0)
 
-  	function testToAppend(testString){
-    	return !(Number(testString) === 0 && testString[testString.length-1] !== '.')
-  	}
-
-  	return (
-      <div>
-        <p>-------------------------------------</p>
-        <p>Current number: {number}</p>
-        <p>-------------------------------------</p>
-        <button className="Number-button" onClick={() => GetNumber( (Number(number) !== 0) ? number+"0" : "0" )}>0</button>
-        <button className="Number-button" onClick={() => GetNumber( testToAppend(number) ? number+"1" : "1" )}>1</button>
-        <button className="Number-button" onClick={() => GetNumber( testToAppend(number) ? number+"2" : "2" )}>2</button>
-        <button className="Function-button" onClick={() => GetNumber(pushedNumber + number)}>+</button>
-        <p></p>
-        <button className="Number-button" onClick={() => GetNumber( testToAppend(number) ? number+"3" : "3" )}>3</button>
-        <button className="Number-button" onClick={() => GetNumber( testToAppend(number) ? number+"4" : "4" )}>4</button>
-        <button className="Number-button" onClick={() => GetNumber( testToAppend(number) ? number+"5" : "5" )}>5</button>
-        <button className="Function-button" onClick={() => GetNumber(pushedNumber - number)}>-</button>
-        <p></p>
-        <button className="Number-button" onClick={() => GetNumber( testToAppend(number) ? number+"6" : "6" )}>6</button>
-        <button className="Number-button" onClick={() => GetNumber( testToAppend(number) ? number+"7" : "7" )}>7</button>
-        <button className="Number-button" onClick={() => GetNumber( testToAppend(number) ? number+"8" : "8" )}>8</button>
-        <button className="Function-button" onClick={() => GetNumber(pushedNumber * number)}>x</button>
-        <p></p>
-        <button className="Number-button" onClick={() => GetNumber( testToAppend(number) ? number+"9" : "9" )}>9</button>
-        <button className="Number-button" onClick={() => {
-              GetNumber( (decimalKey === 1) ? number : number + ".")
-              PressedDecimalKey(1)
-            }
-        }>.</button>
-        <button onClick={() => {
-              GetNumber(0)
-              PressedDecimalKey(0)
-              }
-        }>C</button>
-        <button className="Function-button" onClick={() => GetNumber(pushedNumber / number)}>/</button>
-        <p></p>
-        <button onClick={() => {
-              Push(number)
-              GetNumber(0)
-              PressedDecimalKey(0)
-              }
-        }>Enter</button>
-        <p></p>
-        <button className="Function-button" onClick={() => GetNumber(pushedNumber * pushedNumber)}>squared</button>
-        <button className="Function-button" onClick={() => GetNumber(Math.sqrt (pushedNumber) )}>root</button>
-        <p></p>
-        <button onClick={() => {
-            Push(0)
-            GetNumber(0)
-            PressedDecimalKey(0)
-            }
-        }>Clear calculator</button>
-        <p>Number on the stack: {pushedNumber}</p>
-        <p>-------------------------------------</p>
-      </div>
-    )
+  const buttons = [
+    {
+        "buttonLabel": "0",
+        "buttonType": "Number-button"
+    },
+    {
+        "buttonLabel": "1",
+        "buttonType": "Number-button"
+    },
+    {
+        "buttonLabel": "2",
+        "buttonType": "Number-button"
+    },
+    {
+        "buttonLabel": "+",
+        "buttonType": "Function-button"
+    },
+    {
+        "buttonLabel": "",
+        "buttonType": "Newrow"
+    },
+    {
+        "buttonLabel": "3",
+        "buttonType": "Number-button"
+    },
+    {
+        "buttonLabel": "4",
+        "buttonType": "Number-button"
+    },
+    {
+        "buttonLabel": "5",
+        "buttonType": "Number-button"
+    },
+    {
+        "buttonLabel": "-",
+        "buttonType": "Function-button"
+    },
+    {
+        "buttonLabel": "",
+        "buttonType": "Newrow"
+    },
+    {
+        "buttonLabel": "6",
+        "buttonType": "Number-button"
+    },
+    {
+        "buttonLabel": "7",
+        "buttonType": "Number-button"
+    },
+    {
+        "buttonLabel": "8",
+        "buttonType": "Number-button"
+    },
+    {
+        "buttonLabel": "x",
+        "buttonType": "Function-button"
+    },
+    {
+        "buttonLabel": "",
+        "buttonType": "Newrow"
+    },
+    {
+        "buttonLabel": "9",
+        "buttonType": "Number-button"
+    },
+    {
+        "buttonLabel": ".",
+        "buttonType": "Number-button"
+    },
+    {
+        "buttonLabel": "c",
+        "buttonType": "Calculator-button"
+    },
+    {
+        "buttonLabel": "/",
+        "buttonType": "Function-button"
+    },
+    {
+        "buttonLabel": "",
+        "buttonType": "Newrow"
+    },
+    {
+        "buttonLabel": "Enter",
+        "buttonType": "Calculator-button"
+    },
+    {
+        "buttonLabel": "",
+        "buttonType": "Newrow"
+    },
+    {
+        "buttonLabel": "squared",
+        "buttonType": "Function-button"
+    },
+    {
+        "buttonLabel": "root",
+        "buttonType": "Function-button"
+    },
+    {
+        "buttonLabel": "",
+        "buttonType": "Newrow"
+    },
+    {
+        "buttonLabel": "Clear calculator",
+        "buttonType": "Calculator-button"
     }
+]
 
-	function App() {
-      return (
-        <div className="App">
-          <header className="App-header">
-            <p>
-            A little more advanced RPN calculator <Calculator />
-            </p>
-          </header>
-        </div>
-      );
-    }
+const keypad = buttons.map(
+	(element) => { return ( element.buttonType !== "Newrow" ? makeButton(element.buttonType, element.buttonLabel) : <p></p>) }
+)
 
-	export default App;
+function makeButton(buttonType, buttonLabel) {
+
+    function doAction() {
+//      UpdateStatus(buttonLabel)
+      switch (buttonLabel) {
+        case "0":
+          return GetNumber( (Number(number) !== 0) ? number+"0" : "0" )
+          break
+        case ".":
+          return GetNumber( (decimalKey === 1) ? number : number + "." )
+          // not sure how to           PressedDecimalKey(1)
+          break
+        case "Enter":
+          SaveNumber(number)
+          PressedDecimalKey(0)
+          return GetNumber(0)
+          break
+        case "-":
+          return GetNumber(savedNumber - number)
+          break
+        case "+":
+          return GetNumber(savedNumber + number)
+          break
+        case "x":
+          return GetNumber(savedNumber * number)
+          break
+        case "/":
+          return GetNumber(savedNumber / number)
+          break
+        case "squared":
+          return GetNumber(savedNumber * savedNumber)
+          break
+        case "c":
+          PressedDecimalKey(0)
+          return GetNumber(0)
+          break
+        case "Clear calculator":
+          SaveNumber(0)
+          PressedDecimalKey(0)
+          return GetNumber(0)
+          break
+        default:
+          return GetNumber(testToAppend(number) ? number+buttonLabel : buttonLabel)
+      }
+  }
+    return <button className={buttonType} onClick={() => doAction()}>
+    {buttonLabel}</button>
+}
+
+  function testToAppend(testString){
+    return !(Number(testString) === 0 && testString[testString.length-1] !== '.')
+  }
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        Somewhat improved RPN calculator
+      </header>
+      <p>Current number: {number}</p>
+      {keypad}
+      <p>Saved number: {savedNumber}</p>
+      <p>---------------------------</p>
+      <p>Status: {status}</p>
+    </div>
+  );
+}
+
+export default App;
+
